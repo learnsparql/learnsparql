@@ -1,5 +1,5 @@
 * {
-    color: rgb(255, 255, 255);
+    color: #fff;
 }
 
 .yasr .yasr_btn {
@@ -1118,15 +1118,15 @@ table.dataTable th {
 }
 
 .cm-s-default .cm-keyword {
-    color: rgb(196, 4, 221)
+    color: #708
 }
 
 .cm-s-default .cm-atom {
-    color: rgb(122, 102, 255)
+    color: #219
 }
 
 .cm-s-default .cm-number {
-    color: rgb(47, 255, 172)
+    color: #164
 }
 
 .cm-s-default .cm-def {
@@ -1139,7 +1139,7 @@ table.dataTable th {
 
 .cm-s-default .cm-type,
 .cm-s-default .cm-variable-3 {
-    color: rgb(0, 179, 113)
+    color: #085
 }
 
 .cm-s-default .cm-comment {
@@ -1211,8 +1211,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror {
     position: relative;
     overflow: hidden;
-    background: #fff;
-    color: #ccc;
+    background: #fff
 }
 
 .CodeMirror-scroll {
@@ -1325,7 +1324,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     white-space: pre;
     word-wrap: normal;
     line-height: inherit;
-    color: #ccc;
+    color: inherit;
     z-index: 2;
     position: relative;
     overflow: visible;
@@ -1338,8 +1337,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror-wrap pre.CodeMirror-line-like {
     word-wrap: break-word;
     white-space: pre-wrap;
-    word-break: normal;
-    color: #ccc;
+    word-break: normal
 }
 
 .CodeMirror-linebackground {
