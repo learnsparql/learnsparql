@@ -1,0 +1,49 @@
+.sidenav {
+    height: 100%;
+    width: 11%;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    background-color: #161616;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+
+.sidenav a:hover, .dropdown_chapter1 {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    border: none;
+    background: none; /* <-- optional darüber nachdenken */
+    width: 95%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.active {
+    background-color: green;
+    color: white;
+}
+
+.dropdwon_chapter1_container{
+    display: none;
+    background-color: #212121;
+    padding-left: 8px;
+    width: 95%;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+  }
+
+.split {
+  height: 100%;
+  width: 86%;
+  left: 12%;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+}
