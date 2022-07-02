@@ -1,6 +1,6 @@
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 11%;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -38,3 +38,12 @@
     float: right;
     padding-right: 8px;
   }
+
+.split {
+  height: 100%;
+  width: 86%;
+  left: 12%;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+}
