@@ -8,7 +8,7 @@
     <body>
         <header>
             <a href="../index.html" class="logo">
-                <img src="../assets/img/logo1_3.png" alt="logo">
+                <img src="../assets/img/learnsparql_logo.png" alt="logo" width="80" height="80">
             </a>
             <nav>
                 <ul class="navigation_links">
@@ -19,13 +19,36 @@
             </nav>
            <!-- <a class="signIn?" href="#"><button>Sign In</button></a> -->
         </header>
+        <div class="border-cheatsheet">
         <section>
             <section>
               <article>
-              <h1>TRIPLE PATTERN</h1>
-              <code>A SPARQL query normally has the form: <b>subject</b>, <b>predicate</b> and <b>object</b>.
+                <h1 >SPARQL Query Cheatsheet </h1>
+                <code style="background-color: #363636"><a href="https://www.w3.org/RDF/">SPARQL</a> is a query language which is able to retrieve and manipulate data that is stored in <a href="https://www.w3.org/RDF/">RDF</a> format. This cheatsheet
+                  will help you to create SPARQL queries.<br>
+                  It is generally similar to SQL if you are already familiar with it and bases on the same form.
+                </code>
+              </article>
+              <article>
+              <h2>TRIPLE PATTERN</h2>
+              <code style="background-color: #363636">A SPARQL query normally has the form: <b>subject</b>, <b>predicate</b> and <b>object</b>.
                 <br>This can be used in the general form of : PREFIX SELECT WHERE.
-              </code>
+                <br>Below you can see a simple SPARQL query which returns the people contained in dbpedia which were born in Germany.
+                <br>This query contains the single triple pattern <it>?people dbo:birthPlace res:Germany</it>
+                <br>It searches for all people(subject) which have their birthPlace(predicate) in Germany(object).
+                <div style="background: rgb(39, 38, 38); 
+                font-size: 16px; 
+                padding: 10px; 
+                border: 1px solid lightgray; 
+                margin: 10px;"><pre>PREFIX dbo: &LT;http://dbpedia.org/ontology/>
+PREFIX res: &LT;http://dbpedia.org/resource/>
+  SELECT *
+  WHERE
+   {
+     ?people dbo:birthPlace res:Germany   
+   } 
+</pre></div>
+</code> 
               <article>
                 <h2>PREFIX</h2>
                 <code><a href="https://placeholder.com">Generally: PREFIX label</a> : <a href="https://placeholder.com">[link]</a> 
@@ -94,5 +117,6 @@
             <br clear="all">
     
           </section>
+        </div>
     </body>
 </html>
