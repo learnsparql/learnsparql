@@ -2,6 +2,9 @@
     color: #fff;
 }
 
+input{
+    caret-color: rgb(255, 255, 255);
+ }
 .yasr .yasr_btn {
     border: none;
     background: inherit
@@ -1118,19 +1121,19 @@ table.dataTable th {
 }
 
 .cm-s-default .cm-keyword {
-    color: #708
+    color: rgb(229, 73, 250)
 }
 
 .cm-s-default .cm-atom {
-    color: #219
+    color: rgb(90, 200, 225)
 }
 
 .cm-s-default .cm-number {
-    color: #164
+    color: rgb(36, 210, 140)
 }
 
 .cm-s-default .cm-def {
-    color: #00f
+    color: rgb(96, 251, 210)
 }
 
 .cm-s-default .cm-variable-2 {
@@ -1139,7 +1142,7 @@ table.dataTable th {
 
 .cm-s-default .cm-type,
 .cm-s-default .cm-variable-3 {
-    color: #085
+    color: rgb(35, 227, 157)
 }
 
 .cm-s-default .cm-comment {
