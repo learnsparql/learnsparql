@@ -2,9 +2,7 @@
     color: #fff;
 }
 
-input{
-    caret-color: rgb(255, 255, 255);
- }
+
 .yasr .yasr_btn {
     border: none;
     background: inherit
@@ -2487,4 +2485,3 @@ li.CodeMirror-hint-active {
 .modal-dialog.google-visualization-charteditor-dialog .charts-flat-menu-button {
     box-sizing: content-box
 }
-
