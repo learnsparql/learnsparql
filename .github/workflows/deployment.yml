@@ -16,19 +16,19 @@ jobs:
   deploy:
     # The type of runner that the job will run on
     runs-on: docker://alpine:latest
-    env:
-      ssh_host: ${{ secrets.SSH_HOST }}
-      ssh_user: ${{ secrets.SSH_USER }}
-      ssh_key: ${{ secrets.SSH_KEY }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - shell: bash
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: 'Download artifact'
+        uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: deploy website on server
+      - name: 'deploy website on server'
+        env:
+          ssh_host: ${{ secrets.SSH_HOST }}
+          ssh_user: ${{ secrets.SSH_USER }}
+          ssh_key: ${{ secrets.SSH_KEY }}
         run: |
           echo deploy to server
           apk add --no-cache openssh-client
@@ -36,3 +36,4 @@ jobs:
           ssh-add <(echo "$ssh_key" | tr -d '\r')
           scp -o StrictHostKeyChecking=no . $ssh_user@$ssh_host:/home/$ssh_user/nginx/html
           ssh -o StrictHostKeyChecking=no $ssh_user@$ssh_host "source /etc/profile && cd /home/$ssh_user/nginx/ && docker-compose down && docker-compose up -d"
+        shell: bash
