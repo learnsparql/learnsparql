@@ -15,7 +15,7 @@ on:
 jobs:
   deploy:
     # The type of runner that the job will run on
-    runs-on: docker://alpine:latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,7 +31,7 @@ jobs:
           ssh_key: ${{ secrets.SSH_KEY }}
         run: |
           echo deploy to server
-          apk add --no-cache openssh-client
+          apt update && apt install openssh-client -y
           eval $(ssh-agent -s)
           ssh-add <(echo "$ssh_key" | tr -d '\r')
           scp -o StrictHostKeyChecking=no . $ssh_user@$ssh_host:/home/$ssh_user/nginx/html
