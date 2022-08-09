@@ -31,9 +31,8 @@ jobs:
           ssh_key: ${{ secrets.SSH_KEY }}
         run: |
           echo deploy to server
-          apt update && apt install openssh-client -y
           eval $(ssh-agent -s)
           ssh-add <(echo "$ssh_key" | tr -d '\r')
-          scp -o StrictHostKeyChecking=no . $ssh_user@$ssh_host:/home/$ssh_user/nginx/html
+          scp -o StrictHostKeyChecking=no -r index.html tutorial/ query/ cheatsheet/ assets/ $ssh_user@$ssh_host:/home/$ssh_user/nginx/html
           ssh -o StrictHostKeyChecking=no $ssh_user@$ssh_host "source /etc/profile && cd /home/$ssh_user/nginx/ && docker-compose down && docker-compose up -d"
         shell: bash
