@@ -9,6 +9,7 @@
     <title>SPARQL Tutorial</title>
     <link href="../../../../query/assets/css/yasgui.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 </head>
 
 <body>
@@ -81,18 +82,68 @@
         <h1>Exercise 4</h1>
 
         List all songs which Shakira has written.<br> 
-        Use <b>dbo:writer</b> and <a href="https://dbpedia.org/page/Shakira" style="color:DodgerBlue">Shakira from dbpedia</a><br><br>
+        Use <b>dbo:writer</b> and <a href="https://dbpedia.org/page/Shakira" style="color:DodgerBlue">Shakira from dbpedia</a><br>
+
+        <img id="queryResult" src="../../../assets/img/failed_symbol.png" alt="query status" width="50" height="50"><br>
 
 
         <div id="yasgui"></div>
 
         <script type="text/javascript" src="../../../assets/js/dropdown.js"></script>
+        <script type="axios" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        
+        
+        <script scr="js/query.js" type="text/javascript"></script>
         <script>
+            
             const yasgui = new Yasgui(document.getElementById("yasgui"));
+            var responseRightAnswer;
+            var responseUserInput = "";
+            let rightAnswerQuery = "query=PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT * WHERE {?sub ?pred ?obj .} LIMIT 10";
+            yasgui.on("query",() => {
+                
+                fetch('https://dbpedia.org/sparql', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/sparql-results+json,*/*;q=0.9',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Length': '250'
+                    },
+                    body: encodeURI(rightAnswerQuery)
+                })
+                    .then((response) => response.json())
+                    .then((data) => responseRightAnswer = data)
+                    .then(() => console.log('Right response: ', responseRightAnswer));
+                
+                
+                //dirty fix, how to get response of original yasgui request
+                fetch('https://dbpedia.org/sparql', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/sparql-results+json,*/*;q=0.9',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Length': '250'
+                    },
+                    body: encodeURI('query=' + yasgui.getTab().yasqe.getValue()) // get current user query
+                })
+                    .then((response) => response.json())
+                    .then((data) => responseUserInput = data)
+                    .then(() => console.log('User response: ', responseUserInput));
+
+                
+
+                if (_.isEqual(responseRightAnswer,responseUserInput)){
+                    console.log('equivalent');
+                    document.getElementById('queryResult').src="../../../assets/img/success_symbol.png";
+                    document.getElementById('queryResult').style.visibility = "visible";
+                } else {
+                    console.log('not equivalent');
+                    document.getElementById('queryResult').src="../../../assets/img/failed_symbol.png";
+                    document.getElementById('queryResult').style.visibility = "visible";
+                }
+            });
+            document.getElementById('queryResult').style.visibility = "hidden";
         </script>
-    </div>
-
-    
+    </div>    
 </body>
-
 </html>
