@@ -9,6 +9,7 @@
     <title>SPARQL Tutorial</title>
     <link href="../../../../query/assets/css/yasgui.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 </head>
 
 <body>
@@ -89,6 +90,30 @@
         <script type="text/javascript" src="../../../assets/js/dropdown.js"></script>
         <script>
             const yasgui = new Yasgui(document.getElementById("yasgui"));
+            var realresults;
+            let data = "query=PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT * WHERE {?sub ?pred ?obj .} LIMIT 10";
+
+            yasgui.on("query",() => {
+                fetch('https://dbpedia.org/sparql', {
+                method: 'POST',
+                headers: {
+                'Accept' : 'application/sparql-results+json,*/*;q=0.9',
+                'Content-Type' : 'application/x-www-form-urlencoded',
+                'Content-Length' : '250'
+                },
+                body: encodeURI(data)})
+                .then((response) => response.json())
+                .then((data) => realresults = data)
+                .then(()=> console.log('resultone',realresults));
+                //console.log(event.returnValue);
+                let yasr = yasgui.getTab().yasr;
+                let userresults =yasr.results.json;
+                console.log('result2',userresults);
+                if (_.isEqual(realresults,userresults)){
+                    console.log('equivalent');
+
+            }});
+            
         </script>
     </div>
 
