@@ -67,13 +67,13 @@ PREFIX res: &LT;http://dbpedia.org/resource/>
               <article>
                 <h2>SELECT</h2>
                 <code>You can use SELECT to get rows from a database table.
-                  
-                  The keyword DISTINCT removes duplicates from the result.
+                  a = rdf:type
                 </code>
-              </article>
-                <article>
-                  <code>
-                <h3>Solution sequence modifiers</h3>
+                <h2>FROM</h2>
+                <code>Syntax: SELECT var FROM &LT;link&GT;
+                    From specifies the target graph in the query. <br><br>
+
+                    <h3>Solution sequence modifiers</h3>
                 <div style="background: rgb(39, 38, 38); 
                 font-size: 16px; 
                 padding: 10px; 
@@ -83,31 +83,22 @@ PREFIX res: &LT;http://dbpedia.org/resource/>
                 ORDER BY ?var ASC/DESC (?property) - Sorts the elements by a certain property<br>
                 PROJECTION -  transformation of solution sequence into sequence containing subset of variables<br>
                 OFFSET number -  Makes the elements returned to start after the specified number of elements.<br>
-                LIMIT number -  Limits the amount of returned elements to specified number.<br>
+                LIMIT number -  Limits the amount of returned elements to a specified number.<br>
                 </div>
-              </code>
-              </article>
-              <article>
+                </code>
                 <h2>WHERE</h2>
                 <code>WHERE indicates where to get the rows from and under which condition the rows will be returned.
                   ORDER BY is optional and is appended after the the WHERE portion of the query. It gives you the option to sort the rows by a certain property.
                   Syntax: ORDER BY ASC/DESC (?property)
                 </code>
-              </article>
-              <article>
                 <h2>ASK</h2>
                 <code>You can use ASK to check if a subquery has a solution. It returns true or false.</code>
-              </article>
-              <article>
                 <h2>DESCRIBE</h2>
                 <code>DESCRIBE returns an RDF graph which describes the resources which were found. Its output depends on each application. It normally returns triples in a table.</code>
-              </article>
-              <article>
                 <h2>OPTIONAL</h2>
-                <code>You can use optional when a condition should only be used when applicable.</code>
-              </article>
-
-              <article>
+                <code>You can use optional when a condition should only be used when applicable.
+                  It tries to match a graph pattern and leaves the variable unbound if failed.
+                </code>
                 <h2>CONSTRUCT</h2>
                 <code>CONSTRUCT returns an RDF graph which is constructed by substituting variables in triple templates.</code>
               </article>
@@ -129,10 +120,10 @@ PREFIX res: &LT;http://dbpedia.org/resource/>
                 </div></code>
               </article>
               <article>
-                <h2>Set functions</h2>
-                <code>UNION - adds the specified values <br>
-                  INTERSECT - returns the row with the maximium value <br>
-                  DIFFERENCE - returns the row with the minimum value <br>
+                <h2>Set theory in SPARQL</h2>
+                <code>A ∪ B =  { A. } UNION { B. }<br>
+                  A ∩ B = A. B. <br>
+                  A \ B = A. FILTER NOT EXISTS{ B. } <br>
                    </code>
               </article>
 
@@ -159,8 +150,8 @@ PREFIX res: &LT;http://dbpedia.org/resource/>
                   STRSTARTS(string,comparestring) - compares if a string starts with the comparestring. <br>
                   STRENDS(string,comparestring) - compares if a string ends with the comparestring. <br>
                   CONTAINS(string,comparestring) - compares if a string contains the comparestring somewhere within the string. <br>
-                  STRBEFORE(string,comparestring) - returns the part of the string before the comparestring if contained in the string. If not, it returns "" . <br>
-                  STRAFTER(string,comparestring) - returns the part of the string after the comparestring if contained in the string. If not, it returns "" . <br>
+                  STRBEFORE(string,comparestring) - returns the part of the string before the comparestring if contained in the string. If not, it returns ""<br>
+                  STRAFTER(string,comparestring) - returns the part of the string after the comparestring if contained in the string. If not, it returns ""<br>
                   ENCODE_FOR_URI(string) - encodes an string to a URI(ex: a space is converted into %20). <br>
                   CONCAT(string1,string2,string3,...) - returns a concated string. <br>
                   LANGMATCHES(languagetag, languagerange) - checks if the <a href="http://www.ietf.org/rfc/rfc3066.txtlanguage">range matches the language tag.</a> <br>
@@ -182,7 +173,7 @@ PREFIX res: &LT;http://dbpedia.org/resource/>
               <article>
                 <h2>FILTER</h2>
                 <code>You can use filter to filter the results by a certain condition.
-                  Syntax: filter (lang(?string) = 'en')
+                  Syntax: filter (cond)
                   <h5>Built in filter functions</h5>
                   <div style="background: rgb(39, 38, 38); 
                 font-size: 16px; 
