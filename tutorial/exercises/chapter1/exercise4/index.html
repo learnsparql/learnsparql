@@ -80,8 +80,8 @@
 
         <h1>Exercise 4</h1>
 
-        List all movies/tv shows in which 
-        <a href="https://dbpedia.org/page/Zendaya" style="color:DodgerBlue">Zendaya</a> has starred in.<br> Use <b>dbo:starring</b> and use <b>Limit</b> to limit the amount of results to 10.
+        List the first 10 movies/tv shows in which 
+        <a href="https://dbpedia.org/page/Zendaya" style="color:DodgerBlue">Zendaya</a> has starred in.<br> Use <b>dbo:starring</b> and use <b>Limit</b> to limit the amount of results to 10. Use the variable <b>?movies</b>.
         <br><br>
 
         <img id="queryResult" src="../../../assets/img/failed_symbol.png" alt="query status" width="50" height="50"><br>
@@ -95,7 +95,7 @@
         
         <script scr="js/query.js" type="text/javascript"></script>
         <script>
-            let rightAnswerQuery = "query=prefix dbo: <http://dbpedia.org/ontology/> prefix res: <http://dbpedia.org/resource/> select * where{ ?o dbo:starring res:Zendaya} limit 10";
+            let rightAnswerQuery = "query=prefix dbo: <http://dbpedia.org/ontology/> prefix res: <http://dbpedia.org/resource/> select * where{ ?movies dbo:starring res:Zendaya} limit 10";
         </script>
         <script type="text/javascript" src="../../../assets/js/checker.js"></script>
     </div>    
