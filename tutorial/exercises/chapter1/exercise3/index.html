@@ -9,6 +9,7 @@
     <title>SPARQL Tutorial</title>
     <link href="../../../../query/assets/css/yasgui.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 </head>
 
 <body>
@@ -82,15 +83,21 @@
         <h1>Exercise 3</h1>
 
         Return the definition of  
-        <a href="https://dbpedia.org/page/Scarlett_Johansson" style="color:DodgerBlue">Scarlett Johansson</a> in English using <b>filter</b><br><br>
+        <a href="https://dbpedia.org/page/Scarlett_Johansson" style="color:DodgerBlue">Scarlett Johansson</a> in English using <b>filter</b> and distinct. Use the variable ?string<br><br>
+        <img id="queryResult" src="../../../assets/img/failed_symbol.png" alt="query status" width="50" height="50"><br>
 
 
         <div id="yasgui"></div>
 
         <script type="text/javascript" src="../../../assets/js/dropdown.js"></script>
+        <script type="axios" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        
+        
+        <script scr="js/query.js" type="text/javascript"></script>
         <script>
-            const yasgui = new Yasgui(document.getElementById("yasgui"));
+            let rightAnswerQuery = "query=PREFIX dbo: <http://dbpedia.org/ontology/>   PREFIX res: <http://dbpedia.org/resource/>   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   SELECT DISTINCT ?string    WHERE {        res:Scarlett_Johansson dbo:abstract ?string .filter (lang(?string) = 'en')}";
         </script>
+        <script type="text/javascript" src="../../../assets/js/checker.js"></script>
     </div>
 
     
