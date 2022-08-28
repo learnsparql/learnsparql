@@ -9,6 +9,7 @@
     <title>SPARQL Tutorial</title>
     <link href="../../../../query/assets/css/yasgui.css" rel="stylesheet" type="text/css" />
     <script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 </head>
 
 <body>
@@ -80,15 +81,21 @@
         <h1>Exercise 1</h1>
 
         Return how many gold medals
-        <a href="https://dbpedia.org/page/Usain_Bolt" style="color:DodgerBlue">Usain Bolt</a> has, using the aggregate function <b>Count(*)</b><br><br>
+        <a href="https://dbpedia.org/page/Usain_Bolt" style="color:DodgerBlue">Usain Bolt</a> has, using the aggregate function <b>Count(*)</b>. Name the aggregate function as ?num<br><br>
+        <img id="queryResult" src="../../../assets/img/failed_symbol.png" alt="query status" width="50" height="50"><br>
 
 
         <div id="yasgui"></div>
 
         <script type="text/javascript" src="../../../assets/js/dropdown.js"></script>
+        <script type="axios" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        
+        
+        <script scr="js/query.js" type="text/javascript"></script>
         <script>
-            const yasgui = new Yasgui(document.getElementById("yasgui"));
+            let rightAnswerQuery = "query=PREFIX dbo: <http://dbpedia.org/ontology/>PREFIX res: <http://dbpedia.org/resource/>SELECT COUNT(*) as ?num WHERE{ ?o dbo:goldMedalist res:Usain_Bolt .  } ";
         </script>
+        <script type="text/javascript" src="../../../assets/js/checker.js"></script>
     </div>
 
     
