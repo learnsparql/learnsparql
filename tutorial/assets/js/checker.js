@@ -14,21 +14,32 @@ fetch('https://dbpedia.org/sparql', {
     .then((response) => response.json())
     .then((data) => responseRightAnswer = data);
 
+function getRandomNumberArbitrary(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min) + 1;
+}
 
+function extendArray(array, number) {
+    return array.concat([number]);
+}
+
+var varHolder = [542, 679, 775]; // just random number array, variable names are not allowed to be named after array values!!!
 
 yasgui.on("query", () => {
     //renames variables in answer to different values, so that user can choose their own variable name
-    //Variable names are not allowed to be named after array values!!!
 
     if (responseRightAnswer !== undefined) {
         var head = responseRightAnswer.head;
         var results = responseRightAnswer.results;
         if (once == false) {
             for (i = 0; i < head.vars.length; i++) {
+                if (i + 1 > varHolder.length) {
+                    varHolder = extendArray(varHolder, getRandomNumberArbitrary(varHolder[varHolder.length - 1], varHolder[varHolder.length - 1] * 2));
+                }
                 let name = head.vars[i];
-                let array = ['972', '973', '974', '975', '976', '977', '978', '979'];
-                head.vars[i] = array[i];
-                results.bindings[0][array[i]] = results.bindings[0][name];
+                head.vars[i] = varHolder[i];
+                results.bindings[0][varHolder[i]] = results.bindings[0][name];
                 delete results.bindings[0][name];
             }
             once = true;
@@ -47,10 +58,12 @@ yasr.on("drawn", () => {
         var head = responseUserInput.head;
         var results = responseUserInput.results;
         for (i = 0; i < head.vars.length; i++) {
+            if (i + 1 > varHolder.length) {
+                varHolder = extendArray(varHolder, getRandomNumberArbitrary(varHolder[varHolder.length - 1], varHolder[varHolder.length - 1] * 2));
+            }
             let name = head.vars[i];
-            let array = ['972', '973', '974', '975', '976', '977', '978', '979'];
-            head.vars[i] = array[i];
-            results.bindings[0][array[i]] = results.bindings[0][name];
+            head.vars[i] = varHolder[i];
+            results.bindings[0][varHolder[i]] = results.bindings[0][name];
             delete results.bindings[0][name];
         }
         responseUserInput.results = results;
