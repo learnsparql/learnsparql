@@ -1,23 +1,248 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
-<title>Learn SPARQL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Tutorial SPARQL</title>
 </head>
+
 <body>
-    
-    <header>
-        <a href="index.html" class="logo">
-            <img src="assets/img/learnsparql_logo.png" alt="logo" width="80" height="80">
-        </a>
-        <nav>
-            <ul class="navigation_links">
-                <li><a href="tutorial/index.html">Tutorial</a></li>
-                <li><a href="cheatsheet/index.html">Cheatsheet</a></li>
-                <li><a href="query/index.html">Query</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <a href="index.html" class="logo">
+      <img src="assets/img/learnsparql_logo.png" alt="logo" width="80" height="80">
+    </a>
+    <nav>
+      <ul class="navigation_links">
+        <li><a href="tutorial/index.html">Tutorial</a></li>
+        <li><a class="two" href="cheatsheet/index.html">Cheatsheet</a></li>
+        <li><a href="query/index.html">Query</a></li>
+      </ul>
+    </nav>
+    <!-- <a class="signIn?" href="#"><button>Sign In</button></a> -->
+  </header>
+  <div class="border-cheatsheet">
+    <section>
+      <section>
+        <article>
+          <h1>SPARQL Query Cheatsheet </h1>
+          <code style="background-color: #363636"><a href="https://www.w3.org/RDF/">SPARQL</a> is a query language which
+            is able to retrieve and manipulate data that is stored in <a href="https://www.w3.org/RDF/">RDF</a> format.
+            This cheatsheet
+            will help you to create SPARQL queries.<br>
+            It is generally similar to SQL as both query languages work with databases, just the format of the data is
+            different in SPARQL.
+          </code>
+        </article>
+        <article>
+          <h2>TRIPLE PATTERN</h2>
+          <code style="background-color: #363636">
+            Data stored in RDF normally has the triple form: <b>subject</b>, <b>predicate</b> and <b>object</b>.
+            RDF data is normally stored in a linked graph. For example, Bob has an apple would be a linked graph with
+            <b>Bob</b> and <b>apple</b> being nodes.
+            <b>Has</b> would be an arc which goes from Bob to apple.
+            <br>Below you can see a simple SPARQL query which returns the people contained in dbpedia which were born in
+            Germany.
+            <br>This query contains the single triple pattern <it>?people dbo:birthPlace res:Germany</it>
+            <br>It searches for all people(subject) which have their birthPlace(predicate) in Germany(object).
+            <div style="background: rgb(39, 38, 38); 
+                font-size: 16px; 
+                padding: 10px; 
+                border: 1px solid lightgray; 
+                margin: 10px;">
+              <pre>PREFIX dbo: &LT;http://dbpedia.org/ontology/>
+PREFIX res: &LT;http://dbpedia.org/resource/>
+  SELECT *
+  WHERE
+   {
+     ?people dbo:birthPlace res:Germany   
+   } 
+</pre>
+            </div>
+          </code>
+          <article>
+            <h2>PREFIX</h2>
+            <code>
+              <p style="font-size: 120%;">Generally: PREFIX label : [link]</p>
+              You can add any prefix in connection with a label. It is located at the beginning of the query.
+            </code>
+            <code>
+              <p style="font-size: 120%;">PREFIX dbo : [link] </p>
+              Link for dbo, example <a href="http://dbpedia.org/ontology">http://dbpedia.org/ontology</a>
+            </code>
+            <code>
+              <p style="font-size: 120%;">PREFIX res : [link] </p>
+              Link for resource, example: <a href="http://dbpedia.org/resource">http://dbpedia.org/resource</a>
+            </code>
+            <code>
+              <p style="font-size: 120%;">PREFIX foaf : [link] </p>
+              Link for a <a href="https://en.wikipedia.org/wiki/FOAF_(ontology)">foaf(friend of a friend)</a>, which is
+              a RDF vocabulary(ontology) to describe relations from a person to other people and objects.
+            </code>
+          </article>
+          <article>
+            <h2>SELECT</h2>
+            <code>You can use SELECT to get rows from a database table.
+              a = rdf:type
+            </code>
+            <h2>FROM</h2>
+            <code>Syntax: SELECT var FROM &LT;link&GT;
+              From specifies the target graph in the query. <br><br>
+
+              <h3>Solution sequence modifiers</h3>
+              <div style="background: rgb(39, 38, 38); 
+                font-size: 16px; 
+                padding: 10px; 
+                border: 1px solid lightgray; 
+                margin: 10px;">
+                SELECT DISTINCT - removes duplicates from result. <br>
+                ORDER BY ?var ASC/DESC (?property) - Sorts the elements by a certain property<br>
+                PROJECTION - transformation of solution sequence into sequence containing subset of variables<br>
+                OFFSET number - Makes the elements returned to start after the specified number of elements.<br>
+                LIMIT number - Limits the amount of returned elements to a specified number.<br>
+              </div>
+            </code>
+            <h2>WHERE</h2>
+            <code>WHERE indicates where to get the rows from and under which condition the rows will be returned.
+              ORDER BY is optional and is appended after the the WHERE portion of the query. It gives you the option to
+              sort the rows by a certain property.
+              Syntax: ORDER BY ASC/DESC (?property)
+            </code>
+            <h2>ASK</h2>
+            <code>You can use ASK to check if a subquery has a solution. It returns true or false.</code>
+            <h2>DESCRIBE</h2>
+            <code>DESCRIBE returns an RDF graph which describes the resources which were found. Its output depends on
+              each application. It normally returns triples in a table.</code>
+            <h2>OPTIONAL</h2>
+            <code>You can use optional when a condition should only be used when applicable.
+              It tries to match a graph pattern and leaves the variable unbound if failed.
+            </code>
+            <h2>CONSTRUCT</h2>
+            <code>CONSTRUCT returns an RDF graph which is constructed by substituting variables in triple
+              templates.</code>
+          </article>
+          <article>
+            <h2>Aggregate functions</h2>
+            <code>
+              <div style="background: rgb(39, 38, 38); 
+                  font-size: 16px; 
+                  padding: 10px; 
+                  border: 1px solid lightgray; 
+                  margin: 10px;">
+                SUM - returns the sum of all elements <br>
+                AVG - returns the average of all elements <br>
+                MAX - returns the row with the maximium value <br>
+                MIN - returns the row with the minimum value <br>
+                COUNT() - Counts the amount of elements per group <br>
+                SAMPLE - returns a random element <br>
+                GROUP_CONCAT - concats all elements together <br>
+                These functions normally require a GROUP BY at the end of the query, on which the aggregate function
+                should be applied to.
+                Naming: &LT;func&GT; as ?var
+              </div>
+            </code>
+          </article>
+          <article>
+            <h2>Set theory in SPARQL</h2>
+            <code>A ∪ B = { A. } UNION { B. }<br>
+              A ∩ B = A. B. <br>
+              A \ B = A. FILTER NOT EXISTS{ B. } <br>
+            </code>
+          </article>
+
+          <article>
+            <code>
+              <h3>String conversion functions</h3>
+              <div style="background: rgb(39, 38, 38); 
+                  font-size: 16px; 
+                  padding: 10px; 
+                  border: 1px solid lightgray; 
+                  margin: 10px;">
+                IRI(string) converts a string into an IRI. <br>
+                STR(value) converts a value into a string. <br>
+              </div>
+              <h3>String functions</h3>
+              <div style="background: rgb(39, 38, 38); 
+                  font-size: 16px; 
+                  padding: 10px; 
+                  border: 1px solid lightgray; 
+                  margin: 10px;">
+                STRLEN(string) - returns the length of a string. <br>
+                SUBSTR(string,beginpos,length) - returns a substring of a given string. <br>
+                LCASE(string) - returns a string in lowercase. <br>
+                UCASE(string) - returns a string in uppercase. <br>
+                STRSTARTS(string,comparestring) - compares if a string starts with the comparestring. <br>
+                STRENDS(string,comparestring) - compares if a string ends with the comparestring. <br>
+                CONTAINS(string,comparestring) - compares if a string contains the comparestring somewhere within the
+                string. <br>
+                STRBEFORE(string,comparestring) - returns the part of the string before the comparestring if contained
+                in the string. If not, it returns ""<br>
+                STRAFTER(string,comparestring) - returns the part of the string after the comparestring if contained in
+                the string. If not, it returns ""<br>
+                ENCODE_FOR_URI(string) - encodes an string to a URI(ex: a space is converted into %20). <br>
+                CONCAT(string1,string2,string3,...) - returns a concated string. <br>
+                LANGMATCHES(languagetag, languagerange) - checks if the <a
+                  href="http://www.ietf.org/rfc/rfc3066.txtlanguage">range matches the language tag.</a> <br>
+                REGEX(string,pattern,flag) - checks a string by a specific <a
+                  href="http://www.w3.org/TR/xpath-functions/#regex-syntax">regex pattern</a><br>
+              </div>
+
+
+
+            </code>
+          </article>
+        </article>
+
+      </section>
+
+      <article>
+        <h2>FILTER</h2>
+        <code>You can use filter to filter the results by a certain condition.
+          Syntax: filter (cond)
+          <h5>Built in filter functions</h5>
+          <div style="background: rgb(39, 38, 38); 
+                font-size: 16px; 
+                padding: 10px; 
+                border: 1px solid lightgray; 
+                margin: 10px;">
+            Logical: !(NOT), &&(AND), ||(OR) <br>
+            Math: +, -, *, / <br>
+            Comparison: =, !=, >, &LT; , IN(low,high), ..<br>
+            SPARQL tests: isURI, isBlank, isLiteral, bound<br>
+            SPARQL accessors: str, lang, datatype <br>
+            Other: sameTerm, langMatches, regex)
+          </div>
+        </code>
+
+
+      </article>
+      <article>
+        <h2>SPARQL Tests</h2>
+        <code>
+          <div style="background: rgb(39, 38, 38); 
+                font-size: 16px; 
+                padding: 10px; 
+                border: 1px solid lightgray;  
+                margin: 10px;">
+            isURI(?var) - returns true if term is a URI<br>
+            isBlank(?var) - returns true if term is a blank node<br>
+            isLiteral(?var) - returns true if term is a literal <br>
+            bound(?var) - returns true if a variable is bound to a value. If not, it returns false<br>
+            isIRI(?var) - returns true if term is a IRI<br>
+
+          </div>
+        </code>
+
+
+      </article>
+
+
+
+      <br clear="all">
+
+    </section>
+  </div>
 </body>
+
 </html>
